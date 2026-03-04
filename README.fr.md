@@ -1,3 +1,5 @@
+<img title="Archeo" alt="Alt text" src="/images/Archeo-fr.png">
+
 # Archeo
 
 **Archeo** veut être la multiprise sémantique de l’archéologie de votre architecture d’entreprise.
