@@ -1,3 +1,5 @@
+<img title="Archeo" alt="Alt text" src="/images/Archeo-en.png">
+
 # Archeo
 
 **Archeo** is a semantic power strip for the archaeology of your enterprise architecture.
