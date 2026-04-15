@@ -1,0 +1,19 @@
+[project]
+name = "ArcheoEA"
+version = "0.0.1"
+authors = [
+  { name="Maxime TOLEDANO", email="toledano.maxime@free.fr" },
+]
+description = "ArcheoEA  is a semantic power strip for the archaeology of your enterprise architecture."
+readme = "README.md"
+requires-python = ">=3.14"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/ArcheoEA/Archeo"
