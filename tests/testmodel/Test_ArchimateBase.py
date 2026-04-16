@@ -2,22 +2,22 @@ import sys
 import os
 sys.path.append(f"{os.getcwd()}\\src")
 
-from archeo.model.archimatemodel.ArchimateBase import ArchimateBase
+from archeo.model.archimatemodel.ElementArchimate import ElementArchimate
 
 from pprint import pprint
 
 def test_archimatebase():
-    archimate1 : ArchimateBase = ArchimateBase(pName="ArchimateModel1",
+    archimate1 : ElementArchimate = ElementArchimate(pName="Archimate1",
                                                 pType="TypeA",
                                                 pReferenceId=None,
                                                 pSourcesId=[],
-                                                pDescription="This is a test Archimate model")
+                                                pDescription="This is a test Archimate element")
     
-    assert archimate1.name == "ArchimateModel1"
+    assert archimate1.name == "Archimate1"
     assert archimate1.type == "TypeA"
     assert archimate1.referenceId is not None
     assert archimate1.sourcesId == []
-    assert archimate1.description == "This is a test Archimate model"
+    assert archimate1.description == "This is a test Archimate element"
 
     pprint(archimate1)
 

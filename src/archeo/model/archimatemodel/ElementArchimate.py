@@ -4,13 +4,13 @@ from archeo.model.basemodel.ElementBase import ElementBase
 from dataclasses import dataclass
 from typing import Any, List, Optional, Self
 
-# The ArchimateBase class inherits from ElementBase and represents a base class for Archimate models.
+# The ElementArchimate class inherits from ElementBase and represents a base class for Archimate models.
 # It includes a constructor that initializes the name, type, referenceId, sourcesId, and description attributes
 # with validation to ensure that name, type, and referenceId are not empty or None.
 # The constructor calls the constructor of ElementBase to perform the initialization and validation.
 @dataclass
-class ArchimateBase(ElementBase):
-    # The constructor of ArchimateBase calls the constructor of ElementBase to initialize the name, type, referenceId, sourcesId, and description attributes with validation.
+class ElementArchimate(ElementBase):
+    # The constructor of ElementArchimate calls the constructor of ElementBase to initialize the name, type, referenceId, sourcesId, and description attributes with validation.
     def __init__(self,
                 pName: str,
                 pType: str,
