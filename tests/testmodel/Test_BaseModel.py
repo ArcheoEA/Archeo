@@ -4,6 +4,7 @@ sys.path.append(f"{os.getcwd()}\\src")
 
 from archeo.model.basemodel.IdentityPart import IdentityPart
 from archeo.model.basemodel.ElementBase import ElementBase
+from archeo.model.basemodel.ModelBase import ModelBase
 
 from pprint import pprint
 def test_elementbase():

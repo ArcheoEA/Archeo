@@ -3,6 +3,7 @@ import os
 sys.path.append(f"{os.getcwd()}\\src")
 
 from archeo.model.archimatemodel.ElementArchimate import ElementArchimate
+from archeo.model.archimatemodel.ModelArchimate import ModelArchimate
 
 from pprint import pprint
 
