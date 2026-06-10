@@ -10,6 +10,9 @@ from typing import Any, List, Optional, Self
 # The constructor calls the constructor of ElementBase to perform the initialization and validation.
 @dataclass
 class ArchimateRelation(ElementBase):
+    origElement: IdentityPart
+    destElement: IdentityPart
+
     # The constructor of ArchimateRelation calls the constructor of ElementBase to initialize the name, type, origElement, destElement, referenceId, sourcesId, and description attributes with validation.
     def __init__(self,
                 pName: str,
@@ -25,3 +28,7 @@ class ArchimateRelation(ElementBase):
                          pReferenceId,
                          pSourcesId,
                          pDescription)
+
+    def __hash__(self) -> int:
+        super().__hash__()
+

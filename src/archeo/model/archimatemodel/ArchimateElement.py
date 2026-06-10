@@ -23,3 +23,7 @@ class ArchimateElement(ElementBase):
                          pReferenceId,
                          pSourcesId,
                          pDescription)
+
+    def __hash__(self) -> int:
+        super().__hash__()
+

@@ -10,6 +10,9 @@ from typing import Any, List, Optional, Self
 # The constructor calls the constructor of ElementBase to perform the initialization and validation.
 @dataclass
 class ArchimateFolder(ElementBase):
+    parentFolder: ArchimateFolder | None
+    standardName: str| None
+
     # The constructor of ArchimateFolder calls the constructor of ElementBase to initialize the name, type, parentFolder, referenceId, sourcesId, description and standardName attributes with validation.
     def __init__(self,
                 pName: str,
@@ -25,3 +28,6 @@ class ArchimateFolder(ElementBase):
                          pReferenceId,
                          pSourcesId,
                          pDescription)
+
+    def __hash__(self) -> int:
+        super().__hash__()

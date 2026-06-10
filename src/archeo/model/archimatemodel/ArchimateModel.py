@@ -9,6 +9,12 @@ from typing import Any, List, Optional, Self
 # The constructor calls the constructor of ModelBase to perform the initialization and validation.
 @dataclass
 class ArchimateModel(ModelBase):
+    name: str
+    formalism: str
+    version: str | None
+    customization: str | None
+    description: Optional[str] | None
+    
     # The constructor of ArchimateElement calls the constructor of ModelBase to initialize the name, formalism, version, customization, and description attributes with validation.
     def __init__(self,
                 pName: str,
@@ -22,3 +28,6 @@ class ArchimateModel(ModelBase):
                          pVersion,
                          pCustomization,
                          pDescription)
+
+    def __hash__(self) -> int:
+        super().__hash__()
