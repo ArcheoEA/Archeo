@@ -40,8 +40,11 @@ class ModelBase:
             # Initialize version
             self.version = pVersion if pVersion is not None else "0.0.1"
 
-            # Initialize customization
-            self.customization = pCustomization
+            # Initialize customization, and force string "standard" as value if it's None
+            if (pCustomization is None):
+                self.customization = "standard"
+            else:
+                self.customization = pCustomization
 
             # Initialize description
             self.description = pDescription

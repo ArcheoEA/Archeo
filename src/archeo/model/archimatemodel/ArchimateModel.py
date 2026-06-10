@@ -30,4 +30,20 @@ class ArchimateModel(ModelBase):
                          pDescription)
 
     def __hash__(self) -> int:
-        super().__hash__()
+        try:
+            # Validate that name, formalism, customization are not empty or None before calculating the hash
+            if (self.name is None) or (self.name == "") \
+                    or (self.formalism is None) or (self.formalism == "") \
+                    or (self.customization is None) or (self.customization == ""):
+                print(f"Hash calculation of ArchimateModel failed, with name={self.name}, formalism={self.formalism}, customization={self.customization}")
+
+                raise ValueError("Invalid name, type, formalism, or customization for hashing")
+            
+            # The hash is based on the name, formalism, and customization attributes of the ArchimateModel
+            return hash((self.name, self.formalism, self.customization))
+            
+        except ValueError as e:
+            print(f"Hash calculation of ArchimateModel failed: {e}")
+
+            # Return a default hash value in case of invalid attributes
+            return 0

@@ -28,7 +28,7 @@ class ElementBase:
                 pDescription: Optional[str] = None):
 
         try:
-            # Initialize _name
+            # Initialize name
             if (pName is None) or (pName == ""):
                 raise ValueError("Name cannot be empty")
             else:
