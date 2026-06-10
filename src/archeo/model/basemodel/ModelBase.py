@@ -3,6 +3,9 @@ from typing import Any, List, Optional, Self
 from uuid import uuid4
 from datetime import datetime
 
+# Specific domain constants
+MODEL_CUSTOMIZATION_STANDARD = "standard"
+
 # The ModelBase class represents a model with attributes such as name, formalism, version, customization, and description.
 # It includes validation in the constructor and post-initialization method to ensure that the name and formalism are not empty or None.
 @dataclass ()
@@ -40,9 +43,9 @@ class ModelBase:
             # Initialize version
             self.version = pVersion if pVersion is not None else "0.0.1"
 
-            # Initialize customization, and force string "standard" as value if it's None
+            # Initialize customization, and force constant string MODEL_CUSTOMIZATION_STANDARD as value if it's None
             if (pCustomization is None):
-                self.customization = "standard"
+                self.customization = MODEL_CUSTOMIZATION_STANDARD
             else:
                 self.customization = pCustomization
 
