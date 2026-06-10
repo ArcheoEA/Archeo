@@ -1,6 +1,8 @@
 import sys
 import os
-sys.path.append(f"{os.getcwd()}\\src")
+
+## sys.path.append(f"{os.getcwd()}\\src")
+os.path.join(os.getcwd(), "src")
 
 from archeo.model.basemodel.IdentityPart import IdentityPart
 from archeo.model.basemodel.ElementBase import ElementBase

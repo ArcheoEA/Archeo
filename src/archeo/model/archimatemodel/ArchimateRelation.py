@@ -13,6 +13,9 @@ class ArchimateRelation(ElementBase):
     origElement: IdentityPart
     destElement: IdentityPart
 
+    # The __slots__ declaration is used to optimize memory usage by preventing the creation of a __dict__ for each instance of ElementBase.
+    __slots__ = ['name', 'type', 'origElement', 'destElement', 'referenceId', 'sourcesId', 'description']
+
     # The constructor of ArchimateRelation calls the constructor of ElementBase to initialize the name, type, origElement, destElement, referenceId, sourcesId, and description attributes with validation.
     def __init__(self,
                 pName: str,

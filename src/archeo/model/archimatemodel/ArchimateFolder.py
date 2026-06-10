@@ -13,6 +13,9 @@ class ArchimateFolder(ElementBase):
     parentFolder: ArchimateFolder | None
     standardName: str | None
 
+    # The __slots__ declaration is used to optimize memory usage by preventing the creation of a __dict__ for each instance of ElementBase.
+    __slots__ = ['name', 'type', 'parentFolder', 'referenceId', 'sourcesId', 'description', 'standardName']
+
     # The constructor of ArchimateFolder calls the constructor of ElementBase to initialize the name, type, parentFolder, referenceId, sourcesId, description and standardName attributes with validation.
     def __init__(self,
                 pName: str,
