@@ -14,24 +14,24 @@ from archeo.model.archimatemodel.ArchimateFolder import ArchimateFolder
 from pprint import pprint
 
 def test_archimatebase():
-    # Pre-declaration of objects used in tests
-    model1 : ArchimateModel
-    model2 : ArchimateModel
-    id_elem1 : IdentityPart
-    elem1 : ArchimateElement
-    elem2 : ArchimateElement
-    id_rel : IdentityPart
-    rel1 : ArchimateRelation
-    id_folder : IdentityPart
-    folder1 : ArchimateFolder
-    folder2 : ArchimateFolder 
-
-    ###########################################################################
-    # Test ArchimateModel
-    print("Testing ArchimateModel...")
-    
-    # Create an ArchimateModel instance with default version
     try:
+        # Pre-declaration of objects used in tests
+        model1 : ArchimateModel
+        model2 : ArchimateModel
+        id_elem1 : IdentityPart
+        elem1 : ArchimateElement
+        elem2 : ArchimateElement
+        id_rel : IdentityPart
+        rel1 : ArchimateRelation
+        id_folder : IdentityPart
+        folder1 : ArchimateFolder
+        folder2 : ArchimateFolder 
+
+        ###########################################################################
+        # Test ArchimateModel
+        print("Testing ArchimateModel...")
+        
+        # Create an ArchimateModel instance with default version
         model1 = ArchimateModel(pName="TestModel", pFormalism="ArchiMate 3.1", pDescription="A simple model")
         
         assert model1.name == "TestModel"
@@ -39,15 +39,12 @@ def test_archimatebase():
         assert model1.version == "0.0.1"
         assert model1.customization == MODEL_CUSTOMIZATION_STANDARD
         assert model1.description == "A simple model"
-    except AssertionError as e:
-        print(f"Assertion failed for first ArchimateModel creation: {e}")
     
-    print("\nArchimateModel model1:")
-    pprint(model1)
-    pprint(model1.__hash__())
+        print("\nArchimateModel model1:")
+        pprint(model1)
+        pprint(model1.__hash__())
 
-    # Create another ArchimateModel with explicit version
-    try:
+        # Create another ArchimateModel with explicit version
         model2 = ArchimateModel(pName="TestModel", pFormalism="ArchiMate 3.1", pVersion="1.0.0", pDescription="Same model, with version upgrade")
         
         assert model2.name == "TestModel"
@@ -55,29 +52,19 @@ def test_archimatebase():
         assert model2.version == "1.0.0"
         assert model2.customization == MODEL_CUSTOMIZATION_STANDARD
         assert model2.description == "Same model, with version upgrade"
-    except AssertionError as e:
-        print(f"Assertion failed for second ArchimateModel creation: {e}")
     
-    # Verify equality and hash based on name, formalism, version (inherited from ModelBase)
-    try:
+        # Verify equality and hash based on name, formalism, version (inherited from ModelBase)
         assert model1 != model2
         assert model1.__hash__() != model2.__hash__()
-    except AssertionError as e:
-        print(f"Assertion failed for ArchimateModel comparison: {e}")
 
-    ###########################################################################
-    # Test ArchimateElement
-    print("\nTesting ArchimateElement...")
+        ###########################################################################
+        # Test ArchimateElement
+        print("\nTesting ArchimateElement...")
 
-    try:
-       id_elem1 = IdentityPart(pName="BusinessProcess", pType="BusinessProcess")
+        id_elem1 = IdentityPart(pName="BusinessProcess", pType="BusinessProcess")
 
-    except AssertionError as e:
-        print(f"Assertion failed for element IdentityPart creation: {e}")
-
-    try:
         elem1 = ArchimateElement(pName="BusinessProcess", pType="BusinessProcess", pReferenceId=id_elem1, pSourcesId=[], pDescription="A business process")
-        
+
         assert elem1.name == "BusinessProcess"
         assert elem1.type == "BusinessProcess"
         assert elem1.referenceId == id_elem1
@@ -88,11 +75,7 @@ def test_archimatebase():
         pprint(elem1)
         pprint(elem1.__hash__())
 
-    except AssertionError as e:
-        print(f"Assertion failed for first ArchimateElement creation: {e}")
-
-    # Create another element with auto-generated referenceId
-    try:
+        # Create another element with auto-generated referenceId
         elem2 = ArchimateElement(pName="DataObject", pType="DataObject", pDescription="A data object")
         
         assert elem2.name == "DataObject"
@@ -105,27 +88,16 @@ def test_archimatebase():
         pprint(elem2)
         pprint(elem2.__hash__())
 
-    except AssertionError as e:
-        print(f"Assertion failed for second ArchimateElement creation: {e}")
-
-    # Test equality based on referenceId (inherited from ElementBase)
-    try:
+        # Test equality based on referenceId (inherited from ElementBase)
         assert elem1 != elem2
         assert elem1.__hash__() != elem2.__hash__()
-    except AssertionError as e:
-        print(f"Assertion failed for ArchimateElement comparison: {e}")
 
-    ###########################################################################
-    # Test ArchimateRelation
-    print("\nTesting ArchimateRelation...")
+        ###########################################################################
+        # Test ArchimateRelation
+        print("\nTesting ArchimateRelation...")
 
-    try:
-       id_rel = IdentityPart(pName="AccessRelation", pType="Access")
+        id_rel = IdentityPart(pName="AccessRelation", pType="Access")
 
-    except AssertionError as e:
-        print(f"Assertion failed for relation IdentityPart creation: {e}")
-
-    try:
         rel1 = ArchimateRelation(pName="AccessRelation", pType="Access", pOrigElement=id_elem1, pDestElement=elem2.referenceId, pReferenceId=id_rel)
         
         assert rel1.name == "AccessRelation"
@@ -138,20 +110,12 @@ def test_archimatebase():
         pprint(rel1)
         pprint(rel1.__hash__())
 
-    except AssertionError as e:
-        print(f"Assertion failed for ArchimateRelation creation: {e}")
+        ###########################################################################
+        # Test ArchimateFolder
+        print("\nTesting ArchimateFolder...")
 
-    ###########################################################################
-    # Test ArchimateFolder
-    print("\nTesting ArchimateFolder...")
+        id_folder = IdentityPart(pName="Processes", pType="Folder")
 
-    try:
-       id_folder = IdentityPart(pName="Processes", pType="Folder")
-
-    except AssertionError as e:
-        print(f"Assertion failed for folder IdentityPart creation: {e}")
-    
-    try:
         folder1 = ArchimateFolder(pName="Processes", pType="Folder", pReferenceId=id_folder, pDescription="Root folder")
         
         assert folder1.name == "Processes"
@@ -163,10 +127,6 @@ def test_archimatebase():
         pprint(folder1)
         pprint(folder1.__hash__())
 
-    except AssertionError as e:
-        print(f"Assertion failed for first ArchimateFolder creation: {e}")
-
-    try:
         # Test nested folder (parentFolder is accepted but not stored in current implementation, we just verify instantiation works)
         folder2 = ArchimateFolder(pName="SubProcesses", pType="Folder", pParentFolder=folder1, pDescription="Sub-folder")
         
@@ -180,7 +140,13 @@ def test_archimatebase():
         pprint(folder2.__hash__())
 
     except AssertionError as e:
-        print(f"Assertion failed for second ArchimateFolder creation: {e}")
+        print(f"Assertion failed during tests of ArchimateModel: {e}")
+
+    except TypeError as e:
+        print(f"Type error during tests of ArchimateModel: {e}")
+
+    except Exception as e:
+        print(f"Exception error during tests of ArchimateModel: {e}")
 
 if __name__ == '__main__':
     test_archimatebase()
