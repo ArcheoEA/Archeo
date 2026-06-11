@@ -1,6 +1,11 @@
-from archeo.model.basemodel.ModelBase import ModelBase
+from __future__ import annotations
 
-from dataclasses import dataclass
+from archeo.model.basemodel.ModelBase import ModelBase
+from archeo.model.archimatemodel.ArchimateElement import ArchimateElement
+from archeo.model.archimatemodel.ArchimateRelation import ArchimateRelation
+from archeo.model.archimatemodel.ArchimateFolder import ArchimateFolder
+
+from dataclasses import dataclass, field
 from typing import Any, List, Optional, Self
 
 # The ArchimateModel class inherits from ModelBase and represents a base class for Archimate models.
@@ -15,6 +20,14 @@ class ArchimateModel(ModelBase):
     customization: str | None
     description: Optional[str] | None
     
+    # Dictionary-like structures for storing Archimate model elements and relationships
+    elements: dict[str, ArchimateElement] = field(default_factory=dict)
+    relations: dict[str, ArchimateRelation] = field(default_factory=dict)
+    
+    # Folder trees for model element repository (organization tree) and view repository (view tree)
+    organization_tree: ArchimateFolder | None = None
+    view_tree: ArchimateFolder | None = None
+    
     # The constructor of ArchimateElement calls the constructor of ModelBase to initialize the name, formalism, version, customization, and description attributes with validation.
     def __init__(self,
                 pName: str,
@@ -28,6 +41,12 @@ class ArchimateModel(ModelBase):
                          pVersion,
                          pCustomization,
                          pDescription)
+
+        # Initialize storage structures
+        self.elements: dict[str, ArchimateElement] = {}
+        self.relations: dict[str, ArchimateRelation] = {}
+        self.organization_tree: ArchimateFolder | None = None
+        self.view_tree: ArchimateFolder | None = None
 
     def __hash__(self) -> int:
         try:
