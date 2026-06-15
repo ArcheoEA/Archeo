@@ -1,7 +1,8 @@
+import uuid
+from enum import Enum
+
 from pydantic import BaseModel, Field
 from typing import Optional, List, Union
-from enum import Enum
-import uuid
 
 class ArchiMateVersion(str, Enum):
     V3_2 = "3.2"

@@ -1,4 +1,6 @@
-from .base import BaseElement
+from pydantic import BaseModel, Field
+
+from models.base import BaseElement
 
 # Motivation Layer
 class Stakeholder(BaseElement): pass

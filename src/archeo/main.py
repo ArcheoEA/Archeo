@@ -1,7 +1,9 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File
-from .core.engine import ArchimateEngine
-from .models.store import store, ArchiMateModel, ArchiMateVersion
 import uuid
+
+from fastapi import FastAPI, HTTPException, UploadFile, File
+
+from core.engine import ArchiMateModel
+from models.store import store, ArchiMateModel, ArchiMateVersion
 
 app = FastAPI(title="ArchiMate Enterprise Manager", version="1.0.0")
 

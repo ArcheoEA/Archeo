@@ -1,7 +1,9 @@
 import logging
+
 from typing import List, Dict, Any
-from ..models.store import store, ArchiMateModel, ArchiMateVersion
-from ..models.base import BaseElement
+
+from models.store import store, ArchiMateModel, ArchiMateVersion
+from models.base import BaseElement
 
 logger = logging.getLogger(__name__)
 

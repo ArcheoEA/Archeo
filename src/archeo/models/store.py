@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import Dict, List, Any
-from .base import BaseElement, Relationship, ArchiMateVersion
+
+from models.base import BaseElement, Relationship, ArchiMateVersion
 
 class ArchiMateModel(BaseModel):
     model_id: str
