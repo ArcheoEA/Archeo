@@ -4,7 +4,7 @@ import os
 
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
-from app.models.store import store, ArchiMateModel, ArchiMateVersion
+from app.core.store import store, ArchiMateModel, ArchiMateVersion
 from app.models.layers import Stakeholder
 from app.core.engine import ArchimateEngine
 

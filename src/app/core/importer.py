@@ -8,7 +8,7 @@ from app.models.layers import (
     ApplicationComponent, ApplicationService, DataObject,
     Node, SystemSoftware, Artifact
 )
-from ..models.store import ArchiMateModel
+from .store import ArchiMateModel
 
 # Setup logger
 logger = logging.getLogger(__name__)

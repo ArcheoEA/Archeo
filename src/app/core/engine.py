@@ -2,15 +2,17 @@ import logging
 
 from typing import List, Dict, Any
 
-from app.models.store import store, ArchiMateModel, ArchiMateVersion
-from app.models.base import BaseElement
+from app.models.base import BaseElement, ArchiMateVersion
+from app.core.store import BaseStore, ArchiMateModel
 
 logger = logging.getLogger(__name__)
 
 class ArchimateEngine:
-    @staticmethod
-    def navigate_elements(model_id: str, search_term: str = None) -> List[BaseElement]:
-        model = store.get_model(model_id)
+    def __init__(self, store: BaseStore):
+        self.store = store
+
+    def navigate_elements(self, model_id: str, search_term: str = None) -> List[BaseElement]:
+        model = self.store.get_model(model_id)
         if not model:
             raise ValueError("Model not found")
         
@@ -19,10 +21,9 @@ class ArchimateEngine:
             elements = [e for e in elements if search_term.lower() in e.name.lower()]
         return elements
 
-    @staticmethod
-    def migrate_version(model_id: str, target_version: ArchiMateVersion) -> ArchiMateModel:
+    def migrate_version(self, model_id: str, target_version: ArchiMateVersion) -> ArchiMateModel:
         """Handles migration between 3.2 and 4.0."""
-        model = store.get_model(model_id)
+        model = self.store.get_model(model_id)
         if not model:
             raise ValueError("Model not found")
         
@@ -33,11 +34,10 @@ class ArchimateEngine:
         model.version = target_version
         return model
 
-    @staticmethod
-    def compare_models(model_a_id: str, model_b_id: str) -> Dict[str, Any]:
+    def compare_models(self, model_a_id: str, model_b_id: str) -> Dict[str, Any]:
         """Identifies differences between two models."""
-        m1 = store.get_model(model_a_id)
-        m2 = store.get_model(model_b_id)
+        m1 = self.store.get_model(model_a_id)
+        m2 = self.store.get_model(model_b_id)
         
         if not m1 or not m2:
             raise ValueError("One or both models not found")

@@ -1,12 +1,38 @@
 import uuid
+import os
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 
 from app.core.engine import ArchimateEngine
 from app.core.importer import ArchimateImporter
-from app.models.store import store, ArchiMateModel, ArchiMateVersion
+from app.core.store import ArchiMateVersion, InMemStore
+from app.core.neo4j_store import Neo4jStore
+
+
+# --- Storage Configuration ---
+STORAGE_TYPE = os.getenv("STORAGE_TYPE", "MEMORY") # Options: MEMORY, NEO4J
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
+NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
+NEO4J_PWD = os.getenv("NEO4J_PASSWORD", "password")
+
+# Factory Logic
+if STORAGE_TYPE == "NEO4J":
+    print("🚀 Initializing Neo4j Graph Store...")
+    store = Neo4jStore(NEO4J_URI, NEO4J_USER, NEO4J_PWD)
+else:
+    print("🚀 Initializing In-Memory Store...")
+    store = InMemStore()
 
 app = FastAPI(title="ArchiMate Enterprise Manager", version="1.0.0")
+
+# Inject the chosen store into the engine if needed
+# (Update ArchimateEngine to accept store as a dependency)
+engine = ArchimateEngine(store=store)
+
+@app.on_event("shutdown")
+def shutdown_event():
+    if isinstance(store, Neo4jStore):
+        store.close()
 
 @app.post("/models/import")
 async def import_model(
