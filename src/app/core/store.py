@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 from app.models.base import BaseElement, Relationship, ArchiMateVersion
 
-class ArchiMateModel(BaseModel):
+class ArchimateModel(BaseModel):
     model_id: str
     name: str
     version: ArchiMateVersion
@@ -14,10 +14,10 @@ class ArchiMateModel(BaseModel):
 class BaseStore(ABC):
     """Abstract Interface for all Storage Systems"""
     @abstractmethod
-    def add_model(self, model: ArchiMateModel): pass
+    def add_model(self, model: ArchimateModel): pass
     
     @abstractmethod
-    def get_model(self, model_id: str) -> Optional[ArchiMateModel]: pass
+    def get_model(self, model_id: str) -> Optional[ArchimateModel]: pass
     
     @abstractmethod
     def list_models(self) -> List[str]: pass
@@ -28,12 +28,12 @@ class BaseStore(ABC):
 class InMemStore(BaseStore):
     """Original In-Memory Implementation"""
     def __init__(self):
-        self._models: Dict[str, ArchiMateModel] = {}
+        self._models: Dict[str, ArchimateModel] = {}
 
-    def add_model(self, model: ArchiMateModel):
+    def add_model(self, model: ArchimateModel):
         self._models[model.model_id] = model
 
-    def get_model(self, model_id: str) -> Optional[ArchiMateModel]:
+    def get_model(self, model_id: str) -> Optional[ArchimateModel]:
         return self._models.get(model_id)
 
     def list_models(self) -> List[str]:

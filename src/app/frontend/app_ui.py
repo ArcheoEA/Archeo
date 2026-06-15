@@ -8,13 +8,13 @@ from typing import List
 API_BASE_URL = "http://localhost:8000"
 
 st.set_page_config(
-    page_title="ArchiMate Enterprise Manager",
+    page_title="ArcheoEA",
     page_icon="🏗️",
     layout="wide"
 )
 
-st.title("🏗️ ArchiMate Enterprise Manager")
-st.markdown("Enterprise Architecture Urbanization & Model Management Portal")
+st.title("🏗️ ArcheoEA")
+st.markdown("Enterprise Architecture Urbanization & Model Management Portal : Use a semantic power strip for the archaeology of your enterprise architecture.")
 
 # --- Helper Functions ---
 def api_request(method, endpoint, **kwargs):
@@ -51,7 +51,7 @@ if menu == "🏠 Dashboard":
 
 # --- Module: Import Model ---
 elif menu == "📥 Import Model":
-    st.subheader("Import ArchiMate XML")
+    st.subheader("Import XML (ArchiMate Model Exchange File Format required)")
     
     with st.form("import_form"):
         model_name = st.text_input("Model Name", placeholder="e.g., Target State 2025")

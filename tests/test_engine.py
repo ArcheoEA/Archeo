@@ -4,14 +4,14 @@ import os
 
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
-from app.core.store import store, ArchiMateModel, ArchiMateVersion
+from app.core.store import store, ArchimateModel, ArchiMateVersion
 from app.models.layers import Stakeholder
 from app.core.engine import ArchimateEngine
 
 def test_model_migration():
     # Setup
     m_id = "test-1"
-    model = ArchiMateModel(model_id=m_id, name="Company Architecture", version=ArchiMateVersion.V3_2)
+    model = ArchimateModel(model_id=m_id, name="Company Architecture", version=ArchiMateVersion.V3_2)
     store.add_model(model)
     
     # Execute
@@ -22,12 +22,12 @@ def test_model_migration():
 
 def test_compare_models():
     # Setup Model A
-    ma = ArchiMateModel(model_id="a", name="Model A", version=ArchiMateVersion.V3_2)
+    ma = ArchimateModel(model_id="a", name="Model A", version=ArchiMateVersion.V3_2)
     ma.elements["1"] = Stakeholder(name="CEO")
     store.add_model(ma)
     
     # Setup Model B
-    mb = ArchiMateModel(model_id="b", name="Model B", version=ArchiMateVersion.V3_2)
+    mb = ArchimateModel(model_id="b", name="Model B", version=ArchiMateVersion.V3_2)
     mb.elements["2"] = Stakeholder(name="CFO")
     store.add_model(mb)
     

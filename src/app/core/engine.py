@@ -3,15 +3,17 @@ import logging
 from typing import List, Dict, Any
 
 from app.models.base import BaseElement, ArchiMateVersion
-from app.core.store import BaseStore, ArchiMateModel
+from app.core.store import BaseStore, ArchimateModel
 
 logger = logging.getLogger(__name__)
 
 class ArchimateEngine:
+    store: BaseStore
+
     def __init__(self, store: BaseStore):
         self.store = store
 
-    def navigate_elements(self, model_id: str, search_term: str = None) -> List[BaseElement]:
+    def navigate_elements(self, model_id: str, search_term: str | None = None) -> List[BaseElement]:
         model = self.store.get_model(model_id)
         if not model:
             raise ValueError("Model not found")
@@ -19,9 +21,10 @@ class ArchimateEngine:
         elements = list(model.elements.values())
         if search_term:
             elements = [e for e in elements if search_term.lower() in e.name.lower()]
+        
         return elements
 
-    def migrate_version(self, model_id: str, target_version: ArchiMateVersion) -> ArchiMateModel:
+    def migrate_version(self, model_id: str, target_version: ArchiMateVersion) -> ArchimateModel:
         """Handles migration between 3.2 and 4.0."""
         model = self.store.get_model(model_id)
         if not model:
@@ -32,6 +35,7 @@ class ArchimateEngine:
         # In a real scenario, we would map elements that changed between 3.2 and 4.0
         # For this implementation, we update the version metadata and ensure compatibility
         model.version = target_version
+
         return model
 
     def compare_models(self, model_a_id: str, model_b_id: str) -> Dict[str, Any]:
@@ -52,4 +56,5 @@ class ArchimateEngine:
             "common": list(names1 & names2),
             "relationship_count_diff": len(m1.relationships) - len(m2.relationships)
         }
+
         return diff

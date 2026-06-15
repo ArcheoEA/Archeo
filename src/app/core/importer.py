@@ -2,13 +2,8 @@ import logging
 from lxml import etree
 from typing import Dict, Type
 from app.models.base import BaseElement, Relationship, ArchiMateVersion
-from app.models.layers import (
-    Stakeholder, Driver, Goal, Requirement, Resource, Capability,
-    BusinessActor, BusinessProcess, BusinessService, BusinessObject,
-    ApplicationComponent, ApplicationService, DataObject,
-    Node, SystemSoftware, Artifact
-)
-from .store import ArchiMateModel
+from app.models.layers import *
+from .store import ArchimateModel
 
 # Setup logger
 logger = logging.getLogger(__name__)
@@ -23,36 +18,85 @@ class ArchimateImporter:
     # This ensures strict formalism as requested.
     TYPE_MAP: Dict[str, Type[BaseElement]] = {
         # Motivation Layer
-        "Stakeholder": Stakeholder,
+        "Assessment": Assessment,
+        "Constraint": Constraint,
         "Driver": Driver,
         "Goal": Goal,
+        "Meaning": Meaning,
+        "Outcome": Outcome,
+        "Principle": Principle,
         "Requirement": Requirement,
+        "Stakeholder": Stakeholder,
+        "Value": Value,
         
         # Strategy Layer
-        "Resource": Resource,
         "Capability": Capability,
+        "CourseOfActions": CourseOfActions,
+        "Resource": Resource,
+        "ValueStream": ValueStream,
         
         # Business Layer
         "BusinessActor": BusinessActor,
+        "BusinessCollaboration": BusinessCollaboration,
+        "BusinessEvent": BusinessEvent,
+        "BusinessFunction": BusinessFunction,
+        "BusinessInteration": BusinessInteration,
+        "BusinessInterface": BusinessInterface,
+        "BusinessObject": BusinessObject,
         "BusinessProcess": BusinessProcess,
         "BusinessService": BusinessService,
-        "BusinessObject": BusinessObject,
+        "BusinessRole": BusinessRole,
+        "Contact": Contact,
+        "Product": Product,
+        "Representation": Representation,
         
         # Application Layer
+        "ApplicationCollaboration": ApplicationCollaboration,
         "ApplicationComponent": ApplicationComponent,
+        "ApplicationEvent": ApplicationEvent,
+        "ApplicationFunction": ApplicationFunction,
+        "ApplicationInteraction": ApplicationInteraction,
+        "ApplicationInterface": ApplicationInterface,
+        "ApplicationProcess": ApplicationProcess,
         "ApplicationService": ApplicationService,
         "DataObject": DataObject,
         
         # Technology Layer
-        "Node": Node,
-        "SystemSoftware": SystemSoftware,
         "Artifact": Artifact,
+        "CommunicationNetwork": CommunicationNetwork,
+        "Device": Device,
+        "DistributionNetwork": DistributionNetwork,
+        "Equipment": Equipment,
+        "Facility": Facility,
+        "Material": Material,
+        "Node": Node,
+        "Path": Path,
+        "SystemSoftware": SystemSoftware,
+        "TechnologyCollaboration": TechnologyCollaboration,
+        "TechnologyEvent": TechnologyEvent,
+        "TechnologyFunction": TechnologyFunction,
+        "TechnologyInteraction": TechnologyInteraction,
+        "TechnologyInterface": TechnologyInterface,
+        "TechnologProcess": TechnologProcess,
+        "TechnologyService": TechnologyService,
+
+        # Implementation & Migration Layer
+        "Delivrable": Delivrable,
+        "Gap": Gap,
+        "ImplementationEvent": ImplementationEvent,
+        "Plateau": Plateau,
+        "WorkPackage": WorkPackage,
+
+        # Other Layer
+        "Grouping": Grouping,
+        "Junction": Junction,
+        "Location": Location
     }
 
     @classmethod
-    def import_from_xml(cls, xml_content: bytes, model_id: str) -> ArchiMateModel:
+    def import_from_xml(cls, xml_content: bytes, model_id: str) -> ArchimateModel:
         """
-        Parses XML bytes and returns an ArchiMateModel object.
+        Parses XML bytes and returns an ArchimateModel object.
         """
         try:
             # Parse XML with lxml
@@ -74,7 +118,7 @@ class ArchimateImporter:
             version = ArchiMateVersion.V3_2 
             
             # Initialize the Pydantic Model container
-            arch_model = ArchiMateModel(
+            arch_model = ArchimateModel(
                 model_id=model_id,
                 name=model_name,
                 version=version
@@ -103,7 +147,7 @@ class ArchimateImporter:
             raise e
 
     @classmethod
-    def _parse_element(cls, node, arch_model: ArchiMateModel):
+    def _parse_element(cls, node, arch_model: ArchimateModel):
         """Maps an XML element node to a Pydantic class based on the type attribute."""
         elem_id = node.get("identifier")
         elem_type = node.get("type")
@@ -125,7 +169,7 @@ class ArchimateImporter:
         arch_model.elements[elem_id] = element_instance
 
     @classmethod
-    def _parse_relationship(cls, node, arch_model: ArchiMateModel):
+    def _parse_relationship(cls, node, arch_model: ArchimateModel):
         """Maps an XML relationship node to the Relationship Pydantic class."""
         rel_id = node.get("identifier")
         rel_type = node.get("type")

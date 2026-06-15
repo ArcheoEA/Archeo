@@ -2,10 +2,12 @@ import uuid
 import os
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
+from typing import List
 
+from app.models.base import ArchiMateVersion, BaseElement
 from app.core.engine import ArchimateEngine
 from app.core.importer import ArchimateImporter
-from app.core.store import ArchiMateVersion, InMemStore
+from app.core.store import ArchimateModel, BaseStore, InMemStore
 from app.core.neo4j_store import Neo4jStore
 
 
@@ -14,6 +16,10 @@ STORAGE_TYPE = os.getenv("STORAGE_TYPE", "MEMORY") # Options: MEMORY, NEO4J
 NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PWD = os.getenv("NEO4J_PASSWORD", "password")
+
+store: BaseStore
+app: FastAPI
+engine: ArchimateEngine
 
 # Factory Logic
 if STORAGE_TYPE == "NEO4J":
@@ -28,11 +34,6 @@ app = FastAPI(title="ArchiMate Enterprise Manager", version="1.0.0")
 # Inject the chosen store into the engine if needed
 # (Update ArchimateEngine to accept store as a dependency)
 engine = ArchimateEngine(store=store)
-
-@app.on_event("shutdown")
-def shutdown_event():
-    if isinstance(store, Neo4jStore):
-        store.close()
 
 @app.post("/models/import")
 async def import_model(
@@ -69,26 +70,31 @@ async def import_model(
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 @app.get("/models/{model_id}/search")
-async def search_elements(model_id: str, q: str = None):
+async def search_elements(model_id: str, q: str | None = None) -> List[BaseElement] | None:
     try:
-        return ArchimateEngine.navigate_elements(model_id, q)
+        return engine.navigate_elements(model_id, q)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
 @app.post("/models/migrate/{model_id}")
-async def migrate_model(model_id: str, target_version: ArchiMateVersion):
+async def migrate_model(model_id: str, target_version: ArchiMateVersion) -> ArchimateModel:
     try:
-        return ArchimateEngine.migrate_version(model_id, target_version)
+        return engine.migrate_version(model_id, target_version)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
 @app.get("/models/compare")
 async def compare(a: str, b: str):
     try:
-        return ArchimateEngine.compare_models(a, b)
+        return engine.compare_models(a, b)
     except ValueError as e:
         raise HTTPException(status_code=404, detail=str(e))
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+    if isinstance(store, Neo4jStore):
+        store.close()
+

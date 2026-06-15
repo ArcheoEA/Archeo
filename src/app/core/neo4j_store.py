@@ -3,7 +3,7 @@ import logging
 from neo4j import GraphDatabase
 from typing import List, Optional
 
-from app.core.store import BaseStore, ArchiMateModel
+from app.core.store import BaseStore, ArchimateModel
 from app.models.base import BaseElement, Relationship
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ class Neo4jStore(BaseStore):
     def close(self):
         self.driver.close()
 
-    def add_model(self, model: ArchiMateModel):
+    def add_model(self, model: ArchimateModel):
         with self.driver.session() as session:
             # 1. Create Model Node
             session.run("CREATE (m:Model {id: $id, name: $name, version: $version})", 
@@ -41,7 +41,7 @@ class Neo4jStore(BaseStore):
                 )
         logger.info(f"Model {model.model_id} persisted to Neo4j.")
 
-    def get_model(self, model_id: str) -> Optional[ArchiMateModel]:
+    def get_model(self, model_id: str) -> Optional[ArchimateModel]:
         # Note: Reconstructing a full Pydantic model from Neo4j is heavy.
         # In a real app, we would use Neo4j for queries and only fetch metadata here.
         return None # Implementation omitted for brevity
