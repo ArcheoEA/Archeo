@@ -4,9 +4,9 @@ import os
 
 sys.path.append(os.path.join(os.getcwd(), "src"))
 
-from archeo.models.store import store, ArchiMateModel, ArchiMateVersion
-from archeo.models.base import Stakeholder
-from archeo.core.engine import ArchimateEngine
+from app.models.store import store, ArchiMateModel, ArchiMateVersion
+from app.models.layers import Stakeholder
+from app.core.engine import ArchimateEngine
 
 def test_model_migration():
     # Setup

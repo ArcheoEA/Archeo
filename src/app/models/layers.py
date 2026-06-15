@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from models.base import BaseElement
+from app.models.base import BaseElement
 
 # Motivation Layer
 class Stakeholder(BaseElement): pass
@@ -20,7 +20,7 @@ class BusinessObject(BaseElement): pass
 
 # Application Layer
 class ApplicationComponent(BaseElement): pass
-class ApplicationService(BaseModel): pass
+class ApplicationService(BaseElement): pass
 class DataObject(BaseElement): pass
 
 # Technology Layer
