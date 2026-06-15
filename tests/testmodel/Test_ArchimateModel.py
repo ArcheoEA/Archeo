@@ -138,12 +138,67 @@ def test_archimatebase():
         print("\nArchimateFolder folder2:")
         pprint(folder2)
         pprint(folder2.__hash__())
-
-    except AssertionError as e:
-        print(f"Assertion failed during tests of ArchimateModel: {e}")
-
-    except TypeError as e:
-        print(f"Type error during tests of ArchimateModel: {e}")
+    
+        ###########################################################################
+        # Test ArchimateModel Structure
+        print("\nTesting ArchimateModel Structure...")
+        
+        struct_model = ArchimateModel(pName="StructModel", pFormalism="ArchiMate 3.1", pDescription="Structure test model")
+        
+        # 1. Create Elements
+        elem_proc1 = ArchimateElement(pName="OrderProcess", pType="BusinessProcess")
+        elem_proc2 = ArchimateElement(pName="PaymentProcess", pType="BusinessProcess")
+        elem_data = ArchimateElement(pName="OrderData", pType="DataObject")
+        
+        # 2. Create Relations
+        rel_flow = ArchimateRelation(pName="ProcessFlow", pType="Flow", pOrigElement=elem_proc1.referenceId, pDestElement=elem_proc2.referenceId)
+        rel_access = ArchimateRelation(pName="DataAccess", pType="Access", pOrigElement=elem_proc2.referenceId, pDestElement=elem_data.referenceId)
+        
+        # 3. Create Folders
+        folder_elements = ArchimateFolder(pName="ElementsContainer", pType="Folder", pDescription="Dedicated to model elements")
+        folder_views = ArchimateFolder(pName="ViewsContainer", pType="Folder", pDescription="Dedicated to views")
+        
+        # 4. Add to Model (Assuming standard add methods and collection attributes)
+        struct_model.add_element(elem_proc1)
+        struct_model.add_element(elem_proc2)
+        struct_model.add_element(elem_data)
+        struct_model.add_relation(rel_flow)
+        struct_model.add_relation(rel_access)
+        struct_model.add_folder(folder_elements)
+        struct_model.add_folder(folder_views)
+        
+        # 5. Verify Model Collections
+        assert hasattr(struct_model, 'elements'), "Model should have an 'elements' collection"
+        assert len(struct_model.elements) == 3, f"Expected 3 elements in model, got {len(struct_model.elements)}"
+        assert elem_proc1 in struct_model.elements
+        assert elem_proc2 in struct_model.elements
+        assert elem_data in struct_model.elements
+        
+        assert hasattr(struct_model, 'relations'), "Model should have a 'relations' collection"
+        assert len(struct_model.relations) == 2, f"Expected 2 relations in model, got {len(struct_model.relations)}"
+        assert rel_flow in struct_model.relations
+        assert rel_access in struct_model.relations
+        
+        assert hasattr(struct_model, 'folders'), "Model should have a 'folders' collection"
+        assert len(struct_model.folders) == 2, f"Expected 2 folders in model, got {len(struct_model.folders)}"
+        assert folder_elements in struct_model.folders
+        assert folder_views in struct_model.folders
+        
+        # 6. Test Folder Contents (Elements vs Views)
+        # Assuming folders can hold elements/views
+        folder_elements.add_element(elem_proc1)
+        folder_elements.add_element(elem_data)
+        assert len(folder_elements.elements) == 2, f"Expected 2 elements in folder_elements, got {len(folder_elements.elements)}"
+        assert elem_proc1 in folder_elements.elements
+        assert elem_data in folder_elements.elements
+        
+        # Verify views folder is empty or ready for views
+        assert len(folder_views.elements) == 0, "Views folder should initially contain no elements"
+        # Note: Add view-specific tests if ArchimateModel supports View objects
+        
+        print("\nArchimateModel struct_model:")
+        pprint(struct_model)
+        pprint(struct_model.__hash__())
 
     except Exception as e:
         print(f"Exception error during tests of ArchimateModel: {e}")
