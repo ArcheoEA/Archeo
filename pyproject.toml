@@ -1,10 +1,10 @@
 [project]
-name = "ArcheoEA"
+name = "ArcheoConverter"
 version = "0.0.1"
 authors = [
   { name="Maxime TOLEDANO", email="toledano.maxime@free.fr" },
 ]
-description = "ArcheoEA  is a semantic power strip for the archaeology of your enterprise architecture."
+description = "ArcheoConverter  is a semantic power strip for the archaeology of your enterprise architecture."
 readme = "README.md"
 requires-python = ">=3.14"
 classifiers = [
@@ -16,4 +16,4 @@ license-files = ["LICEN[CS]E*"]
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/ArcheoEA/Archeo"
+Homepage = "https://github.com/ArcheoConverter/Archeo"
