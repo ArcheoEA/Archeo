@@ -1,0 +1,52 @@
+# config/settings.yaml
+name: ArcheoConverter
+version: 1.0.0
+description: ArchiMate model converter, comparator, and management tool
+
+models:
+  supported_versions:
+    - "3.2"
+    - "4.0"
+  max_elements_in_memory: 500000
+
+paths:
+  default_data_dir: "./data"
+  cache_dir: "./cache"
+  logs_dir: "./logs"
+
+logging:
+  version: 1
+  disable_existing_loggers: false
+  formatters:
+    standard:
+      format: "[%(asctime)s] %(levelname)-8s %(name)s:%(lineno)d - %(message)s"
+  handlers:
+    console:
+      class: logging.StreamHandler
+      level: INFO
+      formatter: standard
+      stream: ext://sys.stdout
+    file:
+      class: logging.FileHandler
+      level: DEBUG
+      formatter: standard
+      filename: logs/ArcheoConverter.log
+  root:
+    level: DEBUG
+    handlers: [console, file]
+
+migration:
+  default_from_version: "3.2"
+  default_to_version: "4.0"
+
+ui:
+  theme: light
+  auto_save_on_exit: true
+
+formats:
+  supported:
+    - archimate
+    # future extensions:
+    - bpmn
+    - uml
+    - sysml
