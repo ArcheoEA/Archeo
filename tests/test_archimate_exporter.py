@@ -6,15 +6,15 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from AcheoConverter.core.repository import ModelRepository
-from AcheoConverter.exceptions import ExportError
-from AcheoConverter.formalisms.archimate.exporter import (
+from ArcheoConverter.core.repository import ModelRepository
+from ArcheoConverter.exceptions import ExportError
+from ArcheoConverter.formalisms.archimate.exporter import (
     ArchiMateExporter,
     ExportSelection,
     folder_has_content,
 )
-from AcheoConverter.formalisms.registry import default_registry
-from AcheoConverter.services.importer import ImportService
+from ArcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.services.importer import ImportService
 
 
 @pytest.fixture()

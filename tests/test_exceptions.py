@@ -1,9 +1,9 @@
-"""Tests for :mod:`AcheoConverter.exceptions` (error hierarchy + payloads)."""
+"""Tests for :mod:`ArcheoConverter.exceptions` (error hierarchy + payloads)."""
 
 from __future__ import annotations
 
-from AcheoConverter.exceptions import (
-    AcheoConverterError,
+from ArcheoConverter.exceptions import (
+    ArcheoConverterError,
     ComparisonError,
     ConversionError,
     ExportError,
@@ -20,7 +20,7 @@ from AcheoConverter.exceptions import (
 
 def test_base_error_attributes():
     """Every error carries a code, an http status and a detail list."""
-    error = AcheoConverterError("boom", details=["a", "b"])
+    error = ArcheoConverterError("boom", details=["a", "b"])
     assert error.code == "internal_error"
     assert error.http_status == 500
     assert error.details == ["a", "b"]
@@ -55,7 +55,7 @@ def test_status_mapping():
 
 
 def test_all_domain_errors_derive_from_base():
-    """The whole hierarchy derives from AcheoConverterError (one handler)."""
+    """The whole hierarchy derives from ArcheoConverterError (one handler)."""
     classes = [
         ModelNotFoundError, ModelAlreadyExistsError, ModelImportError,
         UnsupportedFormalismError, UnsupportedVersionError, ConversionError,
@@ -63,4 +63,4 @@ def test_all_domain_errors_derive_from_base():
         ReportNotFoundError,
     ]
     for cls in classes:
-        assert issubclass(cls, AcheoConverterError)
+        assert issubclass(cls, ArcheoConverterError)

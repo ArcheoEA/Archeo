@@ -4,16 +4,16 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.core.repository import ModelRepository
-from AcheoConverter.exceptions import ConversionError
-from AcheoConverter.formalisms.registry import default_registry
-from AcheoConverter.services.converter import (
+from ArcheoConverter.core.repository import ModelRepository
+from ArcheoConverter.exceptions import ConversionError
+from ArcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.services.converter import (
     ConversionRule,
     ConversionRuleRegistry,
     ConversionService,
     build_builtin_rules,
 )
-from AcheoConverter.services.importer import ImportService
+from ArcheoConverter.services.importer import ImportService
 
 
 @pytest.fixture()
@@ -90,7 +90,7 @@ def test_convert_40_to_32_maps_resource(service, model_40):
 
 
 def _archimate_32_types() -> set:
-    from AcheoConverter.formalisms.archimate import types as at
+    from ArcheoConverter.formalisms.archimate import types as at
 
     return set(at.ELEMENT_TYPES_32)
 

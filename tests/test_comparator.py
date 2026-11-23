@@ -4,15 +4,15 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.core.models import (
+from ArcheoConverter.core.models import (
     Model,
     ModelElement,
     ModelFolder,
     ModelMetadata,
     ModelRelationship,
 )
-from AcheoConverter.exceptions import ComparisonError
-from AcheoConverter.services.comparator import ComparatorService
+from ArcheoConverter.exceptions import ComparisonError
+from ArcheoConverter.services.comparator import ComparatorService
 
 
 def _model_a() -> Model:

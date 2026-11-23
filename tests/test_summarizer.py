@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from AcheoConverter.core.models import (
+from ArcheoConverter.core.models import (
     Model,
     ModelElement,
     ModelFolder,
     ModelMetadata,
     ModelRelationship,
 )
-from AcheoConverter.services.comparator import ComparatorService
-from AcheoConverter.services.summarizer import SummarizerService
+from ArcheoConverter.services.comparator import ComparatorService
+from ArcheoConverter.services.summarizer import SummarizerService
 
 
 def _model() -> Model:

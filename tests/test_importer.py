@@ -4,17 +4,17 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.core.repository import ModelRepository
-from AcheoConverter.exceptions import (
+from ArcheoConverter.core.repository import ModelRepository
+from ArcheoConverter.exceptions import (
     ModelAlreadyExistsError,
     ModelImportError,
     PayloadTooLargeError,
     UnsupportedFormalismError,
     UnsupportedVersionError,
 )
-from AcheoConverter.formalisms.registry import default_registry
-from AcheoConverter.services.importer import ImportService, _ensure_unique_ids
-from AcheoConverter.core.models import Model, ModelElement, ModelRelationship
+from ArcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.services.importer import ImportService, _ensure_unique_ids
+from ArcheoConverter.core.models import Model, ModelElement, ModelRelationship
 
 
 @pytest.fixture()

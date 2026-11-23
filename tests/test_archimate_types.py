@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from AcheoConverter.formalisms.archimate import types as at
+from ArcheoConverter.formalisms.archimate import types as at
 
 
 def test_catalog_sizes():

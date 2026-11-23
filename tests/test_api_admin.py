@@ -8,7 +8,7 @@ def test_admin_config(client):
     response = client.get("/api/v1/admin/config")
     assert response.status == 200
     data = response.json()
-    assert data["app_name"] == "AcheoConverter"
+    assert data["app_name"] == "ArcheoConverter"
     assert data["server"]["port"] == 8000
     assert data["limits"]["max_upload_mb"] == 50
     assert data["ui_enabled"] is True

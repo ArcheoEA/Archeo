@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.exceptions import ModelImportError
-from AcheoConverter.formalisms.bpmn.mapper import (
+from ArcheoConverter.exceptions import ModelImportError
+from ArcheoConverter.formalisms.bpmn.mapper import (
     DEFAULT_BPMN_ELEMENT_MAP,
     DEFAULT_BPMN_RELATIONSHIP_MAP,
 )
-from AcheoConverter.formalisms.bpmn.parser import BpmnHandler
-from AcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.formalisms.bpmn.parser import BpmnHandler
+from ArcheoConverter.formalisms.registry import default_registry
 
 
 @pytest.fixture()

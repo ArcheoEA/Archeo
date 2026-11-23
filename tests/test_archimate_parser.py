@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.exceptions import ModelImportError, UnsupportedFormalismError
-from AcheoConverter.formalisms.archimate.parser import ArchiMateHandler
-from AcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.exceptions import ModelImportError, UnsupportedFormalismError
+from ArcheoConverter.formalisms.archimate.parser import ArchiMateHandler
+from ArcheoConverter.formalisms.registry import default_registry
 
 
 @pytest.fixture()

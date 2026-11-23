@@ -6,12 +6,12 @@ import xml.etree.ElementTree as ET
 
 import pytest
 
-from AcheoConverter.core.repository import ModelRepository
-from AcheoConverter.exceptions import ExportError
-from AcheoConverter.formalisms.registry import default_registry
-from AcheoConverter.services.converter import ConversionRuleRegistry, ConversionService, build_builtin_rules
-from AcheoConverter.services.exporter import ExportRequest, ExportService
-from AcheoConverter.services.importer import ImportService
+from ArcheoConverter.core.repository import ModelRepository
+from ArcheoConverter.exceptions import ExportError
+from ArcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.services.converter import ConversionRuleRegistry, ConversionService, build_builtin_rules
+from ArcheoConverter.services.exporter import ExportRequest, ExportService
+from ArcheoConverter.services.importer import ImportService
 
 
 @pytest.fixture()

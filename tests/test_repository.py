@@ -1,12 +1,12 @@
-"""Tests for :mod:`AcheoConverter.core.repository` (in-memory repository)."""
+"""Tests for :mod:`ArcheoConverter.core.repository` (in-memory repository)."""
 
 from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.core.models import Model, ModelElement, ModelMetadata
-from AcheoConverter.core.repository import ModelRepository, ReportStore, estimate_bytes
-from AcheoConverter.exceptions import (
+from ArcheoConverter.core.models import Model, ModelElement, ModelMetadata
+from ArcheoConverter.core.repository import ModelRepository, ReportStore, estimate_bytes
+from ArcheoConverter.exceptions import (
     ModelAlreadyExistsError,
     ModelNotFoundError,
     ReportNotFoundError,

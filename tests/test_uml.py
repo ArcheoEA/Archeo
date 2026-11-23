@@ -4,13 +4,13 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.exceptions import ModelImportError
-from AcheoConverter.formalisms.uml.mapper import (
+from ArcheoConverter.exceptions import ModelImportError
+from ArcheoConverter.formalisms.uml.mapper import (
     DEFAULT_UML_ELEMENT_MAP,
     DEFAULT_UML_RELATIONSHIP_MAP,
 )
-from AcheoConverter.formalisms.uml.parser import UmlHandler
-from AcheoConverter.formalisms.xmi import parse_xmi
+from ArcheoConverter.formalisms.uml.parser import UmlHandler
+from ArcheoConverter.formalisms.xmi import parse_xmi
 
 
 @pytest.fixture()

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.api.routers.models import router  # noqa: F401 - import check
+from ArcheoConverter.api.routers.models import router  # noqa: F401 - import check
 
 
 @pytest.fixture()
@@ -24,7 +24,7 @@ def test_meta(client):
     response = client.get("/api/v1/meta")
     assert response.status == 200
     data = response.json()
-    assert data["app"] == "AcheoConverter"
+    assert data["app"] == "ArcheoConverter"
     formalisms = {(f["formalism"], f["version"]) for f in data["formalisms"]}
     assert ("archimate", "3.2") in formalisms
     assert ("archimate", "4.0") in formalisms

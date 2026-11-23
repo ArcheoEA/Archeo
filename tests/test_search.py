@@ -4,15 +4,15 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.core.models import (
+from ArcheoConverter.core.models import (
     Model,
     ModelElement,
     ModelFolder,
     ModelMetadata,
     ModelRelationship,
 )
-from AcheoConverter.exceptions import GraphTooLargeError, ModelNotFoundError
-from AcheoConverter.services.search import SearchService
+from ArcheoConverter.exceptions import GraphTooLargeError, ModelNotFoundError
+from ArcheoConverter.services.search import SearchService
 
 
 def _big_model() -> Model:

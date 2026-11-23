@@ -1,4 +1,4 @@
-"""PyTest fixtures shared by the whole AcheoConverter test-suite.
+"""PyTest fixtures shared by the whole ArcheoConverter test-suite.
 
 The ``src`` directory is added to ``sys.path`` so the tests run directly
 from a checkout (``pytest``) without installing the package.
@@ -22,13 +22,13 @@ from pathlib import Path
 
 import pytest
 
-# Make `import AcheoConverter` work without installing the package.
+# Make `import ArcheoConverter` work without installing the package.
 SRC_DIR = Path(__file__).resolve().parents[1] / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from AcheoConverter.application import AppState, build_state  # noqa: E402
-from AcheoConverter.config import AppConfig  # noqa: E402
+from ArcheoConverter.application import AppState, build_state  # noqa: E402
+from ArcheoConverter.config import AppConfig  # noqa: E402
 from asgi_client import ASGIClient  # noqa: E402
 
 
@@ -52,7 +52,7 @@ def state(config: AppConfig) -> AppState:
 @pytest.fixture()
 def app(config: AppConfig):
     """A FastAPI application instance with an isolated state."""
-    from AcheoConverter.application import create_app
+    from ArcheoConverter.application import create_app
 
     return create_app(config, setup_app_logging=False)
 

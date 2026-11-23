@@ -65,7 +65,7 @@ def build_multipart(fields: dict[str, str | None], files: dict[str, tuple[str, b
     Returns:
         ``(body_bytes, content_type_header)``.
     """
-    boundary = f"----acheoboundary{uuid.uuid4().hex}"
+    boundary = f"----archeoboundary{uuid.uuid4().hex}"
     chunks: list[bytes] = []
     for name, value in fields.items():
         if value is None:

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.formalisms.archimate.exporter import ArchiMateExporter
+from ArcheoConverter.formalisms.archimate.exporter import ArchiMateExporter
 
 
 @pytest.fixture()
@@ -27,7 +27,7 @@ def two_models(client, sample_32):
     other.elements["ba1"].name = "Client"
     other.elements["bs1"].stereotypes.append("v2")
     del other.elements["ts1"]
-    from AcheoConverter.core.models import ModelElement, ModelRelationship
+    from ArcheoConverter.core.models import ModelElement, ModelRelationship
 
     other.elements["new1"] = ModelElement(id="new1", name="Backup Service",
                                           type="application-service")

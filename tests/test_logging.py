@@ -1,4 +1,4 @@
-"""Tests for :mod:`AcheoConverter.logging_config`."""
+"""Tests for :mod:`ArcheoConverter.logging_config`."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ import logging
 
 import pytest
 
-from AcheoConverter.config import AppConfig, LoggingConfig
-from AcheoConverter.logging_config import ROOT_LOGGER_NAME, setup_logging
+from ArcheoConverter.config import AppConfig, LoggingConfig
+from ArcheoConverter.logging_config import ROOT_LOGGER_NAME, setup_logging
 
 
 def test_console_handler_always_present(tmp_path):

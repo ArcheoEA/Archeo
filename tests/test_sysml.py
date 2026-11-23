@@ -4,14 +4,14 @@ from __future__ import annotations
 
 import pytest
 
-from AcheoConverter.exceptions import ModelImportError
-from AcheoConverter.formalisms.sysml.mapper import (
+from ArcheoConverter.exceptions import ModelImportError
+from ArcheoConverter.formalisms.sysml.mapper import (
     DEFAULT_SYSML_ELEMENT_MAP,
     DEFAULT_SYSML_RELATIONSHIP_MAP,
 )
-from AcheoConverter.formalisms.sysml.parser import SysmlHandler
-from AcheoConverter.formalisms.uml.parser import UmlHandler
-from AcheoConverter.formalisms.registry import default_registry
+from ArcheoConverter.formalisms.sysml.parser import SysmlHandler
+from ArcheoConverter.formalisms.uml.parser import UmlHandler
+from ArcheoConverter.formalisms.registry import default_registry
 
 
 @pytest.fixture()

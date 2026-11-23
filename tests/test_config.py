@@ -1,4 +1,4 @@
-"""Tests for :mod:`AcheoConverter.config` (layered configuration)."""
+"""Tests for :mod:`ArcheoConverter.config` (layered configuration)."""
 
 from __future__ import annotations
 
@@ -6,17 +6,17 @@ import json
 
 import pytest
 
-from AcheoConverter.config import load_config
-from AcheoConverter.exceptions import ConfigError
+from ArcheoConverter.config import load_config
+from ArcheoConverter.exceptions import ConfigError
 
 
 def test_defaults_when_no_source(tmp_path, monkeypatch):
     """With no file and no env vars, built-in defaults are returned."""
-    monkeypatch.delenv("ACHEOCONVERTER_CONFIG", raising=False)
+    monkeypatch.delenv("ARCHEOCONVERTER_CONFIG", raising=False)
     (tmp_path / "config").mkdir(exist_ok=True)
     monkeypatch.chdir(tmp_path)  # ensure config/app.json is not found
     config = load_config()
-    assert config.app_name == "AcheoConverter"
+    assert config.app_name == "ArcheoConverter"
     assert config.server.port == 8000
     assert config.limits.max_upload_mb == 50
     assert config.ui_enabled is True
@@ -29,7 +29,7 @@ def test_json_file_loading(tmp_path, monkeypatch):
         json.dumps({"server": {"port": 9999}, "ui_enabled": False}),
         encoding="utf-8",
     )
-    monkeypatch.delenv("ACHEOCONVERTER_CONFIG", raising=False)
+    monkeypatch.delenv("ARCHEOCONVERTER_CONFIG", raising=False)
     config = load_config(config_file)
     assert config.server.port == 9999
     assert config.ui_enabled is False
@@ -41,7 +41,7 @@ def test_env_file_discovery(tmp_path, monkeypatch):
     """$ACHEOCONVERTER_CONFIG is used when no explicit path is given."""
     config_file = tmp_path / "custom.json"
     config_file.write_text(json.dumps({"server": {"host": "127.0.0.1"}}), encoding="utf-8")
-    monkeypatch.setenv("ACHEOCONVERTER_CONFIG", str(config_file))
+    monkeypatch.setenv("ARCHEOCONVERTER_CONFIG", str(config_file))
     config = load_config()
     assert config.server.host == "127.0.0.1"
 
@@ -50,9 +50,9 @@ def test_env_var_overrides(tmp_path, monkeypatch):
     """ACHEOCONVERTER__* environment variables override file values."""
     config_file = tmp_path / "app.json"
     config_file.write_text(json.dumps({"server": {"port": 9000}}), encoding="utf-8")
-    monkeypatch.setenv("ACHEOCONVERTER__SERVER__PORT", "1234")
-    monkeypatch.setenv("ACHEOCONVERTER__UI_ENABLED", "false")
-    monkeypatch.setenv("ACHEOCONVERTER__LIMITS__MAX_UPLOAD_MB", "5")
+    monkeypatch.setenv("ARCHEOCONVERTER__SERVER__PORT", "1234")
+    monkeypatch.setenv("ARCHEOCONVERTER__UI_ENABLED", "false")
+    monkeypatch.setenv("ARCHEOCONVERTER__LIMITS__MAX_UPLOAD_MB", "5")
     config = load_config(config_file)
     assert config.server.port == 1234
     assert config.ui_enabled is False

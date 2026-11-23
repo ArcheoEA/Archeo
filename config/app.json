@@ -1,5 +1,5 @@
 {
-  "app_name": "AcheoConverter",
+  "app_name": "ArcheoConverter",
   "server": {
     "host": "0.0.0.0",
     "port": 8000,
@@ -8,7 +8,7 @@
   },
   "logging": {
     "level": "INFO",
-    "file": "logs/acheoconverter.log",
+    "file": "logs/archeoconverter.log",
     "max_bytes": 5242880,
     "backup_count": 3
   },

@@ -1,8 +1,8 @@
-"""Tests for :mod:`AcheoConverter.core.models` (in-memory data model)."""
+"""Tests for :mod:`ArcheoConverter.core.models` (in-memory data model)."""
 
 from __future__ import annotations
 
-from AcheoConverter.core.models import (
+from ArcheoConverter.core.models import (
     Formalism,
     Model,
     ModelElement,
@@ -30,7 +30,7 @@ def test_element_defaults_and_validation():
     weird = ModelElement(id="e2", name="X", type="t", visibility="global")
     assert weird.visibility == "public"
     # Enum members are accepted and normalized to their string value.
-    from AcheoConverter.core.models import Visibility
+    from ArcheoConverter.core.models import Visibility
 
     enum_visible = ModelElement(id="e3", name="X", type="t", visibility=Visibility.PRIVATE)
     assert enum_visible.visibility == "private"

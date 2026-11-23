@@ -8,7 +8,7 @@ def test_ui_index_served(client):
     response = client.get("/")
     assert response.status == 200
     assert (response.header("content-type") or "").startswith("text/html")
-    assert "AcheoConverter" in response.text
+    assert "ArcheoConverter" in response.text
     assert 'src="/ui/app.js"' in response.text
 
 
@@ -17,7 +17,7 @@ def test_ui_assets_served(client):
     js = client.get("/ui/app.js")
     assert js.status == 200
     assert "javascript" in (js.header("content-type") or "")
-    assert "AcheoConverter" in js.text
+    assert "ArcheoConverter" in js.text
 
     css = client.get("/ui/style.css")
     assert css.status == 200
@@ -37,8 +37,8 @@ def test_ui_path_traversal_blocked(client):
 
 def test_ui_disabled_returns_404():
     """With ui_enabled=false the UI routes return 404."""
-    from AcheoConverter.application import create_app
-    from AcheoConverter.config import AppConfig
+    from ArcheoConverter.application import create_app
+    from ArcheoConverter.config import AppConfig
     from asgi_client import ASGIClient
 
     config = AppConfig()
