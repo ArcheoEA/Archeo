@@ -4,7 +4,7 @@ version = "0.0.1"
 authors = [
   { name="Maxime TOLEDANO", email="toledano.maxime@free.fr" },
 ]
-description = "ArcheoEA  is a semantic power strip for the archaeology of your enterprise architecture."
+description = "ArcheoEA is a semantic power strip for the archaeology of your enterprise architecture. AcheoConverter is its model import/convert/compare/export engine."
 readme = "README.md"
 requires-python = ">=3.14"
 classifiers = [
@@ -13,7 +13,34 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
-dependencies = []
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+  "pydantic>=2.6",
+  "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/ArcheoEA/Archeo"
+
+[project.scripts]
+acheoconverter = "AcheoConverter.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+AcheoConverter = ["ui/*.html", "ui/*.js", "ui/*.css"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

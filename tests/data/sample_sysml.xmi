@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001"
+         xmlns:sysml="http://www.eclipse.org/sysml/1.4">
+  <sysml:Package xmi:id="sp1" name="VehicleModel">
+    <sysml:BlockDefinition xmi:id="bd1" name="Chassis"/>
+    <sysml:BlockDefinition xmi:id="bd2" name="Engine"/>
+    <sysml:PortDefinition xmi:id="pd1" name="FuelPort"/>
+    <sysml:ItemFlow xmi:id="if1" name="FuelFlow" source="pd1" target="bd2"/>
+    <sysml:ConstraintBlock xmi:id="cb1" name="WeightLimit"/>
+    <sysml:Allocation xmi:id="al1" source="bd1" target="bd2"/>
+    <sysml:RequirementBlock xmi:id="rb1" name="SafetyReq"/>
+  </sysml:Package>
+</xmi:XMI>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20131001"
+         xmlns:uml="http://www.omg.org/spec/UML/20131001">
+  <uml:Model xmi:id="m1" name="OrderSystem">
+    <uml:Package xmi:id="pkg1" name="Core">
+      <uml:Class xmi:id="c1" name="Order"/>
+      <uml:Class xmi:id="c2" name="OrderItem"/>
+      <uml:Interface xmi:id="i1" name="Payable"/>
+      <uml:Association xmi:id="a1" name="contains">
+        <uml:ownedEnd xmi:id="ae1" name="order" type="c1"/>
+        <uml:ownedEnd xmi:id="ae2" name="item" type="c2"/>
+      </uml:Association>
+      <uml:Realization xmi:id="r1" client="c1" supplier="i1"/>
+    </uml:Package>
+    <uml:Package xmi:id="pkg2" name="Process">
+      <uml:Activity xmi:id="act1" name="OrderFlow">
+        <uml:action xmi:id="ac1" name="Validate"/>
+        <uml:action xmi:id="ac2" name="Charge"/>
+        <uml:objectFlow xmi:id="of1" source="ac1" target="ac2"/>
+      </uml:Activity>
+      <uml:State xmi:id="st1" name="Pending"/>
+    </uml:Package>
+  </uml:Model>
+</xmi:XMI>

@@ -1,0 +1,40 @@
+{
+  "app_name": "AcheoConverter",
+  "server": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "cors_origins": ["*"],
+    "workers": 1
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/acheoconverter.log",
+    "max_bytes": 5242880,
+    "backup_count": 3
+  },
+  "limits": {
+    "max_upload_mb": 50,
+    "max_search_results": 500,
+    "max_navigation_depth": 5,
+    "max_graph_nodes": 2000
+  },
+  "formalisms": {
+    "namespaces": {
+      "archimate:3.2": "http://www.archimatetool.org/archimate/types",
+      "archimate:4.0": "http://www.archimatetool.org/archimate/types",
+      "bpmn:2.0": "http://www.omg.org/spec/BPMN/20100524/MODEL",
+      "uml:2.5": "http://www.omg.org/spec/UML/20131001",
+      "sysml:1.4": "http://www.eclipse.org/sysml/1.4"
+    },
+    "accept_any_namespace": true
+  },
+  "conversion": {
+    "unmapped_element_policy": "stereotype",
+    "unmapped_relationship_policy": "drop"
+  },
+  "comparison": {
+    "match_by": "id_then_name"
+  },
+  "ui_enabled": true,
+  "data_dir": "data"
+}

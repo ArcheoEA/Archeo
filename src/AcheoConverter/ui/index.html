@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AcheoConverter</title>
+  <link rel="stylesheet" href="/ui/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <strong>AcheoConverter</strong>
+      <span id="app-version" class="muted"></span>
+    </div>
+    <nav id="tabs">
+      <button data-tab="models" class="active">Models</button>
+      <button data-tab="explorer">Explorer</button>
+      <button data-tab="convert">Convert</button>
+      <button data-tab="compare">Compare</button>
+      <button data-tab="export">Export</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ======================= MODELS ======================= -->
+    <section id="tab-models" class="tab active">
+      <h2>Models in memory</h2>
+      <div class="card">
+        <h3>Import a model</h3>
+        <form id="import-form" class="row">
+          <input type="file" id="import-file" required
+                 accept=".archimate,.bpmn,.bpmn2,.xml,.xmi,.uxml,application/xml,text/xml">
+          <input type="text" id="import-name" placeholder="Name (optional)">
+          <select id="import-formalism">
+            <option value="">auto-detect formalism</option>
+          </select>
+          <select id="import-version"><option value="">auto-detect version</option></select>
+          <label class="check"><input type="checkbox" id="import-overwrite"> overwrite</label>
+          <button type="submit">Import</button>
+        </form>
+        <pre id="import-result" class="result hidden"></pre>
+      </div>
+      <div class="card">
+        <h3>Loaded models</h3>
+        <table id="models-table">
+          <thead>
+            <tr><th>Name</th><th>Id</th><th>Formalism</th><th>Version</th>
+                <th>Elements</th><th>Relations</th><th>Folders</th><th>Imported</th><th></th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ======================= EXPLORER ======================= -->
+    <section id="tab-explorer" class="tab">
+      <h2>Explorer</h2>
+      <div class="card row">
+        <label>Model <select id="ex-model"></select></label>
+        <input type="search" id="ex-q" placeholder="Search (name, type, stereotype, tag)..." size="30">
+        <label>Type <input type="text" id="ex-type" placeholder="business-actor, ..." size="16"></label>
+        <label>Stereo <input type="text" id="ex-stereo" placeholder="external, ..." size="12"></label>
+        <button id="ex-search">Search</button>
+        <button id="ex-clear" class="secondary">Clear</button>
+        <span id="ex-count" class="muted"></span>
+      </div>
+      <div class="split">
+        <div class="card">
+          <h3>Elements <span class="muted" id="ex-results-count"></span></h3>
+          <div class="scroll">
+            <table id="ex-elements">
+              <thead><tr><th>Name</th><th>Type</th><th>Stereotypes</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card">
+          <h3 id="ex-detail-title">Element detail</h3>
+          <pre id="ex-detail" class="result">Select an element.</pre>
+        </div>
+      </div>
+      <div class="split">
+        <div class="card">
+          <h3>Folders / views</h3>
+          <div id="ex-folders" class="scroll muted">Select a model.</div>
+        </div>
+        <div class="card">
+          <h3>Graph</h3>
+          <div class="row">
+            <select id="graph-scope">
+              <option value="model">whole model</option>
+              <option value="folder">folder</option>
+              <option value="root">from element (neighborhood)</option>
+            </select>
+            <select id="graph-folder"></select>
+            <input type="text" id="graph-root" placeholder="element id" size="18">
+            <label>Depth <input type="number" id="graph-depth" value="2" min="1" max="5" style="width:3.5em"></label>
+            <button id="graph-render">Render</button>
+          </div>
+          <div id="graph-canvas" class="graph"></div>
+          <div id="graph-info" class="muted"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CONVERT ======================= -->
+    <section id="tab-convert" class="tab">
+      <h2>Convert / migrate</h2>
+      <div class="card">
+        <form id="convert-form" class="row">
+          <label>Source model <select id="conv-model"></select></label>
+          <label>Target formalism <select id="conv-target-f"></select></label>
+          <label>Target version <select id="conv-target-v"></select></label>
+          <label class="check"><input type="checkbox" id="conv-dry"> dry run</label>
+          <button type="submit">Convert</button>
+        </form>
+        <div id="conv-rules" class="muted rules"></div>
+        <pre id="convert-result" class="result hidden"></pre>
+      </div>
+    </section>
+
+    <!-- ======================= COMPARE ======================= -->
+    <section id="tab-compare" class="tab">
+      <h2>Compare &amp; integrate</h2>
+      <div class="card row">
+        <label>Base model <select id="cmp-base"></select></label>
+        <label>Other model <select id="cmp-other"></select></label>
+        <label>Match by
+          <select id="cmp-match">
+            <option value="id_then_name" selected>id then name</option>
+            <option value="id">id</option>
+            <option value="name">name</option>
+          </select>
+        </label>
+        <button id="cmp-run">Compare</button>
+        <label class="check"><input type="checkbox" id="cmp-removals"> include removals in plan</label>
+      </div>
+      <div id="cmp-summary" class="cards-row hidden"></div>
+      <div class="card">
+        <h3>Integration plan (other &rarr; base)
+          <button id="plan-build" class="small">Build plan</button>
+          <button id="plan-apply" class="small secondary">Apply to base model</button>
+        </h3>
+        <pre id="cmp-detail" class="result">Run a comparison first.</pre>
+      </div>
+    </section>
+
+    <!-- ======================= EXPORT ======================= -->
+    <section id="tab-export" class="tab">
+      <h2>Export (ArchiMate Model Exchange XML)</h2>
+      <div class="card">
+        <form id="export-form" class="row">
+          <label>Model <select id="exp-model"></select></label>
+          <label>Scope
+            <select id="exp-scope">
+              <option value="full">full</option>
+              <option value="partial">partial</option>
+              <option value="filtered">filtered</option>
+            </select>
+          </label>
+          <label>Target version <select id="exp-version">
+            <option value="">model version</option><option>3.2</option><option>4.0</option>
+          </select></label>
+          <button type="submit">Export XML</button>
+          <button type="button" id="export-json" class="secondary">Preview JSON</button>
+        </form>
+        <div class="row" style="margin-top:.6rem">
+          <label>Element ids <input type="text" id="exp-elem-ids" placeholder="a, b, c" size="24"></label>
+          <label>Relationship ids <input type="text" id="exp-rel-ids" placeholder="r1, r2" size="18"></label>
+          <label>Folder ids <input type="text" id="exp-folder-ids" placeholder="f1, f2" size="18"></label>
+        </div>
+        <div class="row" style="margin-top:.6rem">
+          <label>Element types <input type="text" id="exp-types" placeholder="business-actor, ..." size="24"></label>
+          <label>Name regex <input type="text" id="exp-regex" placeholder="^Order.*" size="18"></label>
+          <label>Stereotypes <input type="text" id="exp-stereos" placeholder="external, ..." size="18"></label>
+        </div>
+        <pre id="export-result" class="result hidden"></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>AcheoConverter &middot; API docs:
+      <a href="/docs" target="_blank">/docs</a> &middot;
+      <a href="/openapi.json" target="_blank">/openapi.json</a>
+    </span>
+  </footer>
+  <script src="/ui/app.js"></script>
+</body>
+</html>

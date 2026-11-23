@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archimate:model xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1"
+    xmlns:archimate="http://www.archimatetool.org/archimate/types"
+    xmlns:archimateelementtypes="http://www.archimatetool.org/archimate/elementtypes">
+  <archimate:folder name="Strategy" type="strategy">
+    <archimate:goal xmi:id="g1" name="Reduce order processing cost" visibility="public">
+      <archimate:documentation>Reduce the cost of processing orders by 20%.</archimate:documentation>
+    </archimate:goal>
+    <archimate:driver xmi:id="d1" name="Cost pressure"/>
+    <archimate:requirement xmi:id="req1" name="Automation requirement"/>
+  </archimate:folder>
+  <archimate:folder name="Business" type="business">
+    <archimate:businessActor xmi:id="ba1" name="Customer">
+      <archimate:stereotypes>
+        <archimate:stereotype name="External"/>
+      </archimate:stereotypes>
+      <archimate:tags>
+        <archimate:tag name="customer"/>
+      </archimate:tags>
+    </archimate:businessActor>
+    <archimate:businessService xmi:id="bs1" name="Order Management Service">
+      <archimate:properties>
+        <archimate:property key="owner" value="Sales"/>
+      </archimate:properties>
+    </archimate:businessService>
+    <archimate:businessProcess xmi:id="bp1" name="Order Processing"/>
+    <archimate:businessRole xmi:id="br1" name="Order Handler"/>
+    <archimate:businessObject xmi:id="bo1" name="Order"/>
+  </archimate:folder>
+  <archimate:folder name="Application" type="application">
+    <archimate:applicationComponent xmi:id="ac1" name="Order Web Shop"/>
+    <archimate:applicationService xmi:id="as1" name="Order API"/>
+    <archimate:dataObject xmi:id="do1" name="OrderData"/>
+  </archimate:folder>
+  <archimate:folder name="Technology" type="technology">
+    <archimate:node xmi:id="n1" name="Order Server"/>
+    <archimate:systemSoftware xmi:id="ss1" name="Order Shop Application"/>
+    <archimate:technologyService xmi:id="ts1" name="Compute Service"/>
+  </archimate:folder>
+  <archimate:serving xmi:id="r1" source="bs1" target="ba1"/>
+  <archimate:assignment xmi:id="r2" source="bp1" target="br1"/>
+  <archimate:realization xmi:id="r3" source="as1" target="bs1"/>
+  <archimate:flow xmi:id="r4" source="bp1" target="bo1"/>
+  <archimate:storing xmi:id="r5" source="as1" target="do1"/>
+  <archimate:aggregation xmi:id="r6" source="n1" target="ss1" aggregation="true"/>
+  <archimate:aggregation xmi:id="r7" source="ss1" target="do1" aggregation="false"/>
+  <archimate:influence xmi:id="r8" source="d1" target="g1"/>
+  <archimate:association xmi:id="r9" source="req1" target="bp1"/>
+</archimate:model>

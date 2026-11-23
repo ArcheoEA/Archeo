@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archimate:model xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:version="2.1"
+    xmlns:archimate="http://www.archimatetool.org/archimate/types"
+    xmlns:archimateelementtypes="http://www.archimatetool.org/archimate/elementtypes">
+  <archimate:folder name="Strategy" type="strategy">
+    <archimate:goal xmi:id="g1" name="Reduce order processing cost"/>
+    <archimate:requirement xmi:id="req1" name="Automation requirement"/>
+  </archimate:folder>
+  <archimate:folder name="Business" type="business">
+    <archimate:businessActor xmi:id="ba1" name="Customer">
+      <archimate:stereotypes>
+        <archimate:stereotype name="External"/>
+      </archimate:stereotypes>
+    </archimate:businessActor>
+    <archimate:businessService xmi:id="bs1" name="Order Management Service"/>
+    <archimate:businessProcess xmi:id="bp1" name="Order Processing"/>
+    <archimate:businessObject xmi:id="bo1" name="Order"/>
+  </archimate:folder>
+  <archimate:folder name="Application" type="application">
+    <archimate:applicationComponent xmi:id="ac1" name="Order Web Shop"/>
+    <archimate:applicationService xmi:id="as1" name="Order API"/>
+    <archimate:dataObject xmi:id="do1" name="OrderData"/>
+  </archimate:folder>
+  <archimate:folder name="Technology" type="technology">
+    <archimate:node xmi:id="n1" name="Order Server"/>
+    <archimate:systemSoftware xmi:id="ss1" name="Order Shop Application"/>
+    <archimate:resource xmi:id="res1" name="Order Storage">
+      <archimate:stereotypes>
+        <archimate:stereotype name="storage"/>
+      </archimate:stereotypes>
+      <archimate:documentation>4.0-only Resource concept used as storage.</archimate:documentation>
+    </archimate:resource>
+  </archimate:folder>
+  <archimate:serving xmi:id="r1" source="bs1" target="ba1"/>
+  <archimate:realization xmi:id="r3" source="as1" target="bs1"/>
+  <archimate:flow xmi:id="r4" source="bp1" target="bo1"/>
+  <archimate:storing xmi:id="r5" source="as1" target="do1"/>
+  <archimate:aggregation xmi:id="r6" source="n1" target="ss1" aggregation="true"/>
+  <archimate:association xmi:id="r10" source="req1" target="bp1"/>
+  <archimate:usage xmi:id="r11" source="ss1" target="res1"/>
+</archimate:model>

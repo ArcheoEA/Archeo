@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  id="defs1" targetNamespace="http://example.com/order">
+  <bpmn:participant id="p1" name="Order Service" processRef="proc1"/>
+  <bpmn:process id="proc1" name="Order Processing" isExecutable="true">
+    <bpmn:startEvent id="se1" name="Order Received"/>
+    <bpmn:task id="t1" name="Validate Order"/>
+    <bpmn:exclusiveGateway id="g1" name="Valid?"/>
+    <bpmn:userTask id="t2" name="Pick Items"/>
+    <bpmn:serviceTask id="t3" name="Charge Payment"/>
+    <bpmn:endEvent id="ee1" name="Order Shipped"/>
+    <bpmn:endEvent id="ee2" name="Order Rejected"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="g1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="g1" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:dataObject id="do1" name="Order"/>
+  <bpmn:dataStore id="ds1" name="Orders DB"/>
+  <bpmn:message id="m1" name="OrderMessage"/>
+  <bpmn:messageFlow id="mf1" sourceRef="t3" targetRef="p1" messageRef="m1"/>
+</bpmn:definitions>
