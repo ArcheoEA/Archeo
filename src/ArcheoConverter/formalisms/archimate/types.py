@@ -57,83 +57,159 @@ def _et(canonical: str, xml_name: str, display: str, perspective: str,
 ELEMENT_TYPES_32: dict[str, ElementTypeInfo] = {
     t.canonical: t
     for t in (
-        # --- Motivation ------------------------------------------------ #
+        # --- Motivation Layer ------------------------------------------------ #
         _et("stakeholder", "stakeholder", "Stakeholder", "motivation"),
         _et("driver", "driver", "Driver", "motivation"),
+        _et("assessment", "assessment", "Assessment", "motivation"),
         _et("goal", "goal", "Goal", "motivation"),
         _et("outcome", "outcome", "Outcome", "motivation"),
-        _et("requirement", "requirement", "Requirement", "motivation"),
         _et("principle", "principle", "Principle", "motivation"),
-        _et("assessment", "assessment", "Assessment", "motivation"),
-        _et("means-of-realization", "meansOfRealization", "Means of Realization", "motivation"),
-        # --- Business -------------------------------------------------- #
+        _et("requirement", "requirement", "Requirement", "motivation"),
+        _et("constraint", "constraint", "Constraint", "motivation"),
+        _et("meaning", "meaning", "Meaning", "motivation"),
+        _et("value", "value", "Value", "motivation"),
+        # --- Strategy Layer -------------------------------------------------- #
+        _et("resource", "resource", "Resource", "strategy"),
+        _et("capability", "capability", "Capability", "strategy"),
+        _et("value-stream", "valueStream", "Value Stream", "strategy"),
+        _et("course-of-action", "CourseOfAction", "Course Of Action", "strategy"),
+        # --- Business Layer -------------------------------------------------- #
         _et("business-actor", "businessActor", "Business Actor", "business"),
         _et("business-role", "businessRole", "Business Role", "business"),
         _et("business-collaboration", "businessCollaboration", "Business Collaboration", "business"),
-        _et("business-service", "businessService", "Business Service", "business"),
-        _et("business-interaction", "businessInteraction", "Business Interaction", "business"),
+        _et("business-interface", "businessInterface", "Business Interface", "business"),
         _et("business-process", "businessProcess", "Business Process", "business"),
         _et("business-function", "businessFunction", "Business Function", "business"),
+        _et("business-interaction", "businessInteraction", "Business Interaction", "business"),
         _et("business-event", "businessEvent", "Business Event", "business"),
-        _et("business-communication-path", "businessCommunicationPath",
-            "Business Communication Path", "business"),
-        _et("business-location", "businessLocation", "Business Location", "business"),
-        _et("business-resource", "businessResource", "Business Resource", "business"),
+        _et("business-service", "businessService", "Business Service", "business"),
         _et("business-object", "businessObject", "Business Object", "business"),
-        _et("business-application-function", "businessApplicationFunction",
-            "Business Application Function", "business", legacy=True),
-        # --- Application ----------------------------------------------- #
+        _et("contract", "contract", "Contract", "business"),
+        _et("representation", "representation", "Representation", "business"),
+        _et("product", "product", "Product", "business"),
+        # --- Application Layer ----------------------------------------------- #
         _et("application-component", "applicationComponent", "Application Component", "application"),
-        _et("application-collaboration", "applicationCollaboration",
-            "Application Collaboration", "application"),
-        _et("application-service", "applicationService", "Application Service", "application"),
-        _et("application-interaction", "applicationInteraction",
-            "Application Interaction", "application"),
-        _et("application-process", "applicationProcess", "Application Process", "application"),
+        _et("application-collaboration", "applicationCollaboration", "Application Collaboration", "application"),
+        _et("application-interface", "applicationInterface", "Application Interface", "application"),
         _et("application-function", "applicationFunction", "Application Function", "application"),
+        _et("application-interaction", "applicationInteraction", "Application Interaction", "application"),
+        _et("application-process", "applicationProcess", "Application Process", "application"),
         _et("application-event", "applicationEvent", "Application Event", "application"),
-        _et("application-protocol", "applicationProtocol", "Application Protocol", "application"),
-        _et("security-service", "securityService", "Security Service", "application"),
-        _et("system-software", "systemSoftware", "System Software", "application"),
-        _et("distribution-artifact", "distributionArtifact", "Distribution Artifact", "application"),
+        _et("application-service", "applicationService", "Application Service", "application"),
         _et("data-object", "dataObject", "Data Object", "application"),
-        _et("artifact", "artifact", "Artifact", "application"),
-        # --- Technology ------------------------------------------------- #
+        # --- Technology Layer ------------------------------------------------- #
         _et("node", "node", "Node", "technology"),
         _et("device", "device", "Device", "technology"),
-        _et("communication-path", "communicationPath", "Communication Path", "technology"),
-        _et("technology-collaboration", "technologyCollaboration",
-            "Technology Collaboration", "technology"),
-        _et("technology-service", "technologyService", "Technology Service", "technology"),
-        _et("technology-interaction", "technologyInteraction",
-            "Technology Interaction", "technology"),
-        _et("technology-process", "technologyProcess", "Technology Process", "technology"),
+        _et("system-software", "systemSoftware", "System Software", "technology"),
+        _et("technology-collaboration", "technologyCollaboration", "Technology Collaboration", "technology"),
+        _et("technology-interface", "technologyInterface", "Technology Interface", "technology"),
+        _et("path", "path", "Path", "technology"),
+        _et("communication-network", "communicationNetwork", "Communication Network", "technology"),
         _et("technology-function", "technologyFunction", "Technology Function", "technology"),
+        _et("technology-process", "technologyProcess", "Technology Process", "technology"),
+        _et("technology-interaction", "technologyInteraction", "Technology Interaction", "technology"),
         _et("technology-event", "technologyEvent", "Technology Event", "technology"),
-        _et("technology-communication-path", "technologyCommunicationPath",
-            "Technology Communication Path", "technology"),
-        _et("technology-resource", "technologyResource", "Technology Resource", "technology"),
-        _et("technology-object", "technologyObject", "Technology Object", "technology"),
-        # --- Physical --------------------------------------------------- #
-        _et("physical-device", "physicalDevice", "Physical Device", "physical"),
-        _et("physical-node", "physicalNode", "Physical Node", "physical"),
-        # --- Implementation & migration -------------------------------- #
-        _et("work-product", "workProduct", "Work Product", "implementation"),
+        _et("technology-service", "technologyService", "Technology Service", "technology"),
+        _et("artifact", "artifact", "Artifact", "technology"),
+        _et("equipment", "equipment", "Equipment", "technology"),
+        _et("facility", "facility", "Facility", "technology"),
+        _et("distribution-network", "distributionNetwork", "Distribution Network", "technology"),
+        _et("material", "material", "Material", "technology"),
+        # --- Implementation & Migration Layer -------------------------------- #
+        _et("work-package", "workPackage", "Work Package", "implementation"),
+        _et("deliverable", "deliverable", "Deliverable", "implementation"),
+        _et("implementation-event", "implementationEvent", "Implementation Event", "implementation"),
+        _et("plateau", "plateau", "Plateau", "implementation"),
         _et("gap", "gap", "Gap", "implementation"),
-        _et("improvement", "improvement", "Improvement", "implementation"),
-        _et("realization-state", "realizationState", "Realization State", "implementation"),
-        _et("driving-factor", "drivingFactor", "Driving Factor", "implementation"),
-        # --- Extension -------------------------------------------------- #
-        _et("extension", "extension", "Extension", "extension"),
+        # --- Composite -------------------------------------------------- #
+        _et("grouping", "grouping", "Grouping", "composite"),
+        _et("location", "location", "location", "location"),
     )
 }
 
-#: ArchiMate 4.0 element catalog: 3.2 plus the 4.0-specific concepts.
+#: ArchiMate 4.0 element catalog: majority of 3.2 elements, some renamed and some deleted, plus the 4.0-specific concepts.
 ELEMENT_TYPES_40: dict[str, ElementTypeInfo] = {
-    **ELEMENT_TYPES_32,
-    # The abstract Resource concept introduced by ArchiMate 4.0 (technology
-    # perspective). It generalizes artifacts, devices, nodes, etc.
-    _et("resource", "resource", "Resource", "technology", abstract=True),
+    t.canonical: t
+    for t in (
+        # --- Motivation Domain ------------------------------------------------ #
+        _et("stakeholder", "stakeholder", "Stakeholder", "motivation"),
+        _et("driver", "driver", "Driver", "motivation"),
+        _et("assessment", "assessment", "Assessment", "motivation"),
+        _et("goal", "goal", "Goal", "motivation"),
+        _et("outcome", "outcome", "Outcome", "motivation"),
+        _et("principle", "principle", "Principle", "motivation"),
+        _et("requirement", "requirement", "Requirement", "motivation"),
+        ### DELETED: _et("constraint", "constraint", "Constraint", "motivation"),
+        _et("meaning", "meaning", "Meaning", "motivation"),
+        _et("value", "value", "Value", "motivation"),
+        # --- Strategy Domain -------------------------------------------------- #
+        _et("resource", "resource", "Resource", "strategy"),
+        _et("capability", "capability", "Capability", "strategy"),
+        _et("value-stream", "valueStream", "Value Stream", "strategy"),
+        _et("course-of-action", "CourseOfAction", "Course Of Action", "strategy"),
+        # --- Common Domain -------------------------------------------------- #
+        _et("role", "role", "Role", "common"),
+        _et("collaboration", "collaboration", "Collaboration", "common"),
+        _et("process", "process", "Process", "common"),
+        _et("function", "function", "Function", "common"),
+        _et("event", "event", "Event", "common"),
+        _et("service", "service", "Service", "common"),
+        # --- Business Domain -------------------------------------------------- #
+        _et("business-actor", "businessActor", "Business Actor", "business"),
+        ### POOLING: _et("business-role", "businessRole", "Business Role", "business"),
+        ### POOLING: _et("business-collaboration", "businessCollaboration", "Business Collaboration", "business"),
+        _et("business-interface", "businessInterface", "Business Interface", "business"),
+        ### POOLING: _et("business-process", "businessProcess", "Business Process", "business"),
+        ### POOLING: _et("business-function", "businessFunction", "Business Function", "business"),
+        ### DELETED: _et("business-interaction", "businessInteraction", "Business Interaction", "business"),
+        ### POOLING: _et("business-event", "businessEvent", "Business Event", "business"),
+        ### POOLING: _et("business-service", "businessService", "Business Service", "business"),
+        _et("business-object", "businessObject", "Business Object", "business"),
+        ### DELETED: _et("contract", "contract", "Contract", "business"),
+        ### DELETED: _et("representation", "representation", "Representation", "business"),
+        _et("product", "product", "Product", "business"),
+        # --- Application Domain ----------------------------------------------- #
+        _et("application-component", "applicationComponent", "Application Component", "application"),
+        ### POOLING: _et("application-collaboration", "applicationCollaboration", "Application Collaboration", "application"),
+        _et("application-interface", "applicationInterface", "Application Interface", "application"),
+        ### POOLING: _et("application-function", "applicationFunction", "Application Function", "application"),
+        ### DELETED: _et("application-interaction", "applicationInteraction", "Application Interaction", "application"),
+        ### POOLING: _et("application-process", "applicationProcess", "Application Process", "application"),
+        ### POOLING: _et("application-event", "applicationEvent", "Application Event", "application"),
+        ### POOLING: _et("application-service", "applicationService", "Application Service", "application"),
+        _et("data-object", "dataObject", "Data Object", "application"),
+        # --- Technology Domain ------------------------------------------------- #
+        _et("node", "node", "Node", "technology"),
+        _et("device", "device", "Device", "technology"),
+        _et("system-software", "systemSoftware", "System Software", "technology"),
+        ### POOLING: _et("technology-collaboration", "technologyCollaboration", "Technology Collaboration", "technology"),
+        _et("technology-interface", "technologyInterface", "Technology Interface", "technology"),
+        _et("path", "path", "Path", "technology"),
+        _et("communication-network", "communicationNetwork", "Communication Network", "technology"),
+        ### POOLING: _et("technology-function", "technologyFunction", "Technology Function", "technology"),
+        ### POOLING: _et("technology-process", "technologyProcess", "Technology Process", "technology"),
+        ### DELETED: _et("technology-interaction", "technologyInteraction", "Technology Interaction", "technology"),
+        ### POOLING: _et("technology-event", "technologyEvent", "Technology Event", "technology"),
+        ### POOLING: _et("technology-service", "technologyService", "Technology Service", "technology"),
+        _et("artifact", "artifact", "Artifact", "technology"),
+        _et("equipment", "equipment", "Equipment", "technology"),
+        _et("facility", "facility", "Facility", "technology"),
+        _et("distribution-network", "distributionNetwork", "Distribution Network", "technology"),
+        _et("material", "material", "Material", "technology"),
+        # --- Implementation & Migration Domain -------------------------------- #
+        _et("work-package", "workPackage", "Work Package", "implementation"),
+        _et("deliverable", "deliverable", "Deliverable", "implementation"),
+        ### DELETED: _et("implementation-event", "implementationEvent", "Implementation Event", "implementation"),
+        _et("plateau", "plateau", "Plateau", "implementation"),
+        ### DELETED: _et("gap", "gap", "Gap", "implementation"),
+        # --- Composite -------------------------------------------------- #
+        _et("grouping", "grouping", "Grouping", "composite"),
+        _et("location", "location", "location", "location"),
+        # --- New in 4.0 -------------------------------------------------- #
+        # The abstract Resource concept introduced by ArchiMate 4.0 (technology
+        # perspective). It generalizes artifacts, devices, nodes, etc.
+        _et("resource", "resource", "Resource", "technology", abstract=True),
+    )
 }
 
 #: Known ArchiMate folder ``type`` attribute values.

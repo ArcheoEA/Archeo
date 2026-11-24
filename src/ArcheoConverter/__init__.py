@@ -27,7 +27,7 @@ from ArcheoConverter import (
     application,
     config,
     exceptions,
-    logg
+    logging_config,
 )
 
 from ArcheoConverter.core.models import (
