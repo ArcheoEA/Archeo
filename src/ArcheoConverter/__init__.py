@@ -23,6 +23,13 @@ from __future__ import annotations
 
 __version__ = "1.0.0"
 
+from ArcheoConverter import (
+    application,
+    config,
+    exceptions,
+    logg
+)
+
 from ArcheoConverter.core.models import (
     Formalism,
     Model,

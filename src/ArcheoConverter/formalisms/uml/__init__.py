@@ -3,13 +3,13 @@
 from ArcheoConverter.formalisms.uml.mapper import (
     DEFAULT_UML_ELEMENT_MAP,
     DEFAULT_UML_RELATIONSHIP_MAP,
-    UML_ELEMENT_TYPES,
+    DEFAULT_UML_ELEMENT_STEREOTYPES,
 )
 from ArcheoConverter.formalisms.uml.parser import UmlHandler
 
 __all__ = [
     "UmlHandler",
-    "UML_ELEMENT_TYPES",
+    "DEFAULT_UML_ELEMENT_STEREOTYPES",
     "DEFAULT_UML_ELEMENT_MAP",
     "DEFAULT_UML_RELATIONSHIP_MAP",
 ]
