@@ -59,6 +59,7 @@ class RelationshipDiff(BaseModel):
 
     base_id: str
     other_id: str
+    name: str
     changes: dict[str, FieldChange] = Field(default_factory=dict)
 
 
@@ -272,8 +273,8 @@ class ComparatorService:
                 payload["kind"] = change_map["kind"].new
             if "description" in change_map:
                 payload["description"] = change_map["description"].new
-            payload["elements_added"] = mod.elements_added
-            payload["elements_removed"] = mod.elements_removed
+            ### [MTO / BugToSolve] payload["elements_added"] = mod.elements_added
+            ### [MTO / BugToSolve] payload["elements_removed"] = mod.elements_removed
             operations.append(Operation(
                 op="update_folder", target_id=mod.base_id, payload=payload
             ))
@@ -373,7 +374,7 @@ class ComparatorService:
         warning instead of failing the whole plan.
         """
         merged = base.model_copy(deep=True)
-        report = ApplyReport(base_id=base.model_id, operations_total=len(plan.operations))
+        report = ApplyReport(base_id=base.model_id, operations_total=len(plan.operations), applied=0, skipped=0)
 
         for operation in plan.operations:
             try:
@@ -628,7 +629,7 @@ class ComparatorService:
             changes = self._rel_changes(base.relationships[bid], other.relationships[oid])
             if changes:
                 section.modified.append(RelationshipDiff(
-                    base_id=bid, other_id=oid, changes=changes
+                    base_id=bid, other_id=oid, name="NoName", changes=changes
                 ))
         return section
 

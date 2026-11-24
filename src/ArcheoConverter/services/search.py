@@ -117,7 +117,7 @@ class SearchService:
             if property_key is not None and property_key not in element.properties:
                 continue
             if property_value is not None:
-                value = element.properties.get(property_key)
+                value = element.properties.get(str(property_key))
                 if str(value).lower() != property_value.lower():
                     continue
 
